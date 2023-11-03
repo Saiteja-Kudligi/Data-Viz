@@ -1,0 +1,59 @@
+{
+  "planets": [
+    {
+      "name": "Mercury",
+      "distanceFromEarth": 48,
+      "imageFilename": "mercury.jpg",
+      "moons": 0
+    },
+    {
+      "name": "Venus",
+      "distanceFromEarth": 67,
+      "imageFilename": "venus.jpg",
+      "moons": 0
+    },
+    {
+      "name": "Earth",
+      "distanceFromEarth": 0,
+      "imageFilename": "earth.jpg",
+      "moons": 1
+    },
+    {
+      "name": "Mars",
+      "distanceFromEarth": 140,
+      "imageFilename": "mars.jpg",
+      "moons": 2
+    },
+    {
+      "name": "Jupiter",
+      "distanceFromEarth": 484,
+      "imageFilename": "jupiter.jpg",
+      "moons": 79
+    },
+    {
+      "name": "Saturn",
+      "distanceFromEarth": 886,
+      "imageFilename": "saturn.jpg",
+      "moons": 83
+    },
+    {
+      "name": "Uranus",
+      "distanceFromEarth": 1785,
+      "imageFilename": "uranus.jpg",
+      "moons": 27
+    },
+    {
+      "name": "Neptune",
+      "distanceFromEarth": 2795,
+      "imageFilename": "neptune.jpg",
+      "moons": 14
+    },
+
+    {
+      "name": "Pluto",
+      "distanceFromEarth": 3673,
+      "imageFilename": "pluto.jpg",
+      "moons" : 0
+    }
+  ]
+}
