@@ -1,0 +1,73 @@
+[
+    {
+      "name": "Peppermint Mocha",
+      "price": "$5.99",
+      "image": "Peppermint Mocha.jpg",
+      "ingredients": "Espresso, steamed milk, caramel syrup",
+      "calories": "250 calories"
+    },
+    {
+      "name": "Caramel Brulée Latte",
+      "price": "$4.99",
+      "image": "Caramel Brulée Latte.jpg",
+      "ingredients": "Espresso, steamed milk, vanilla syrup",
+      "calories": "200 calories"
+    },
+    {
+      "name": "New Iced Gingerbread Oatmilk Chai",
+      "price": "$6.49",
+      "image": "New Iced Gingerbread Oatmilk Chai.png",
+      "ingredients": "Coffee, milk, chocolate, whipped cream",
+      "calories": "320 calories"
+    },
+    {
+      "name": "Starbucks® Christmas Blend 2023",
+      "price": "$3.99",
+      "image": "Starbucks® Christmas Blend 2023.png",
+      "ingredients": "Espresso, water, ice",
+      "calories": "10 calories"
+    },
+    {
+      "name": "Iced Sugar Cookie Almondmilk Latte",
+      "price": "$4.99",
+      "image": "Iced Sugar Cookie Almondmilk Latte.jpg",
+      "ingredients": "Black tea, milk, spices",
+      "calories": "220 calories"
+    },
+    {
+      "name": "Snowman Cookie",
+      "price": "$4.49",
+      "image": "Snowman Cookie.jpg",
+      "ingredients": "Espresso, steamed milk, milk foam",
+      "calories": "120 calories"
+    },
+    {
+      "name": "Peppermint Mocha Frappuccino®",
+      "price": "$5.99",
+      "image": "Peppermint Mocha Frappuccino®.jpg",
+      "ingredients": "Espresso, steamed milk, white chocolate syrup",
+      "calories": "350 calories"
+    },
+    {
+      "name": "Signature Hot Chocolate",
+      "price": "$2.99",
+      "image": "Signature Hot Chocolate.jpg",
+      "ingredients": "Pure espresso shot",
+      "calories": "5 calories"
+    },
+    {
+      "name": "Gingerbread Loaf",
+      "price": "$6.49",
+      "image": "Gingerbread Loaf.jpg",
+      "ingredients": "Coffee, caramel, milk, whipped cream",
+      "calories": "280 calories"
+    },
+    {
+      "name": "Peppermint Brownie Cake Pop",
+      "price": "$4.99",
+      "image": "Peppermint Brownie Cake Pop.jpg",
+      "ingredients": "Matcha, milk, sweetener",
+      "calories": "180 calories"
+    }
+  ]
+  

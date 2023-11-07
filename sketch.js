@@ -1,71 +1,85 @@
-let planets = [];
-let distanceTimeout;
-let spacing = 140; // 300px spacing between planets
+let menuItems;
+let selectedItem = null; // To store the selected menu item
 
 function preload() {
-  loadJSON('planet_data.json', Planets);
+  menuItems = loadJSON("menu.json");
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 600);
   noLoop();
 }
 
 function draw() {
-  background(0);
-  displayPlanets();
-  textSize(24);
-}
-
-function Planets(data) {  
-  for (let Data of data.planets) {
-    let planet = {
-      name: Data.name,
-      distanceFromEarth: Data.distanceFromEarth,
-      image: loadImage('images/' + Data.imageFilename)
-    };
-    planets.push(planet);
-    
+  background(255);
+  displayMenu();
+  
+  if (selectedItem !== null) {
+    displayDetails(selectedItem);
   }
 }
 
-function displayPlanets() {
-  let x = 100;
-  for (let i = 0; i < planets.length; i++) {
-    image(planets[i].image, x, height / 2 - 50, 100, 100);
-    textAlign(CENTER, TOP);
-    fill(255);
-    text(planets[i].name, x + 50, height / 2 + 60);
-    x += spacing;
-  }
-}
+function displayMenu() {
+  for (let i = 0; i < menuItems.length; i++) {
+    let item = menuItems[i];
+    let y = i * 60 + 20;
 
-function mousePressed() {
-  let x = 100;
-  for (let i = 0; i < planets.length; i++) {
-    if (mouseX > x && mouseX < x + 100 && mouseY > height / 2 - 50 && mouseY < height / 2 + 50) {
-      displayPlanetInfo(planets[i].name, planets[i].distanceFromEarth);
-      break;
+    fill(0);
+    text(item.name, 50, y);
+    text(item.price, 200, y);
+
+    let itemImage = loadImage("images/" + item.image);
+    image(itemImage, 10, y - 20, 30, 30);
+
+    if (
+      mouseX > 10 &&
+      mouseX < 40 &&
+      mouseY > y - 20 &&
+      mouseY < y + 10
+    ) {
+      fill(0, 0, 255);
+      rect(10, y - 20, 30, 30);
     }
-    x += spacing;
   }
 }
 
-function displayPlanetInfo(planetName, distance) {
+function displayDetails(item) {
+  // Clear the menu screen
+  clear();
   
-  textAlign(CENTER, TOP);
-  fill(255);
+  // Display details of the selected item
+  textSize(24);
+  text(item.name, 50, 50);
+  textSize(16);
+  text("Price: " + item.price, 50, 80);
+  text("Ingredients: " + item.ingredients, 50, 110);
+  text("Calories: " + item.calories, 50, 140);
   
-  text('Distance from Earth to ' + planetName + ': ' + distance + ' million miles', width / 2, height - 130);
-  setTimeout(() => {
-    clearInfo();
-  }, 1500); // Hide the information after 3 seconds
+  // Add a back button to return to the menu
+  fill(0, 255, 0);
+  rect(350, 500, 100, 40);
+  fill(0);
+  textSize(20);
+  text("Back to Menu", 360, 525);
 }
 
-function clearInfo() {
-  redraw(); // Redraw the planets and title to make them reappear
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function mouseClicked() {
+  if (selectedItem === null) {
+    for (let i = 0; i < menuItems.length; i++) {
+      let y = i * 60 + 20;
+      if (
+        mouseX > 10 &&
+        mouseX < 40 &&
+        mouseY > y - 20 &&
+        mouseY < y + 10
+      ) {
+        selectedItem = menuItems[i];
+      }
+    }
+  } else {
+    if (mouseX > 350 && mouseX < 450 && mouseY > 500 && mouseY < 540) {
+      // Clicked the back button to return to the menu
+      selectedItem = null;
+    }
+  }
 }
