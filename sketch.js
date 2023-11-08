@@ -1,85 +1,86 @@
-let menuItems;
-let selectedItem = null; // To store the selected menu item
+let cities;
+let zoomLevel = 1;
+let zoomInBtn, zoomOutBtn, zoomPercentage, zoomInput;
+let xoffset = 0;
+let yoffset = 0; // Store the y-offset for panning
+let colors = {}; // Object to store colors for countries
 
 function preload() {
-  menuItems = loadJSON("menu.json");
+  cities = loadTable("worldcities.csv", "header");
 }
 
 function setup() {
-  createCanvas(800, 600);
-  noLoop();
+  createCanvas(windowWidth, windowHeight);
+  fill(255, 150);
+  noStroke();
+
+  // Function to generate a random color
+  function randomColor() {
+    return color(random(255), random(255), random(255));
+  }
+
+  // Assign a random color to each unique country
+  let uniqueCountries = Array.from(new Set(cities.getColumn("country")));
+  for (let i = 0; i < uniqueCountries.length; i++) {
+    colors[uniqueCountries[i]] = randomColor();
+  }
+
+  zoomInBtn = select('#zoomInBtn');
+  zoomOutBtn = select('#zoomOutBtn');
+  zoomPercentage = select('#zoomPercentage');
+  zoomInput = select('#zoomInput');
+
+  zoomInBtn.mousePressed(zoomIn);
+  zoomOutBtn.mousePressed(zoomOut);
+  zoomInput.input(changeZoomLevel);
+  frameRate(60);
 }
 
 function draw() {
-  background(255);
-  displayMenu();
-  
-  if (selectedItem !== null) {
-    displayDetails(selectedItem);
+  background(0);
+  translate(xoffset, yoffset);
+  scale(10 * zoomLevel);
+  for (let i = 0; i < cities.getRowCount(); i++) {
+    let country = cities.getString(i, "country");
+    let latitude = cities.getNum(i, "lat");
+    let longitude = cities.getNum(i, "lng");
+    setXY(latitude, longitude, colors[country]); // Assign the country's color
   }
+
+  zoomPercentage.html("Zoom: " + (zoomLevel * 100).toFixed(0) + "%");
 }
 
-function displayMenu() {
-  for (let i = 0; i < menuItems.length; i++) {
-    let item = menuItems[i];
-    let y = i * 60 + 20;
-
-    fill(0);
-    text(item.name, 50, y);
-    text(item.price, 200, y);
-
-    let itemImage = loadImage("images/" + item.image);
-    image(itemImage, 10, y - 20, 30, 30);
-
-    if (
-      mouseX > 10 &&
-      mouseX < 40 &&
-      mouseY > y - 20 &&
-      mouseY < y + 10
-    ) {
-      fill(0, 0, 255);
-      rect(10, y - 20, 30, 30);
-    }
-  }
+function setXY(lat, lng, col) {
+  let x = map(lng, -180, 180, 0, width);
+  let y = map(lat, 90, -90, 0, height);
+  fill(col);
+  ellipse(x, y, 0.25, 0.25);
 }
 
-function displayDetails(item) {
-  // Clear the menu screen
-  clear();
-  
-  // Display details of the selected item
-  textSize(24);
-  text(item.name, 50, 50);
-  textSize(16);
-  text("Price: " + item.price, 50, 80);
-  text("Ingredients: " + item.ingredients, 50, 110);
-  text("Calories: " + item.calories, 50, 140);
-  
-  // Add a back button to return to the menu
-  fill(0, 255, 0);
-  rect(350, 500, 100, 40);
-  fill(0);
-  textSize(20);
-  text("Back to Menu", 360, 525);
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
-function mouseClicked() {
-  if (selectedItem === null) {
-    for (let i = 0; i < menuItems.length; i++) {
-      let y = i * 60 + 20;
-      if (
-        mouseX > 10 &&
-        mouseX < 40 &&
-        mouseY > y - 20 &&
-        mouseY < y + 10
-      ) {
-        selectedItem = menuItems[i];
-      }
-    }
-  } else {
-    if (mouseX > 350 && mouseX < 450 && mouseY > 500 && mouseY < 540) {
-      // Clicked the back button to return to the menu
-      selectedItem = null;
-    }
+function zoomIn() {
+  zoomLevel += 0.1;
+  zoomLevel = constrain(zoomLevel, 0.1, 10);
+  zoomInput.value(zoomLevel);
+}
+
+function zoomOut() {
+  zoomLevel -= 0.1;
+  zoomLevel = constrain(zoomLevel, 0.1, 10);
+  zoomInput.value(zoomLevel);
+}
+
+function changeZoomLevel() {
+  zoomLevel = float(zoomInput.value());
+  zoomLevel = constrain(zoomLevel, 0.1, 10);
+}
+
+function mouseDragged() {
+  if (mouseButton === LEFT) {
+    xoffset += mouseX - pmouseX;
+    yoffset += mouseY - pmouseY;
   }
 }
