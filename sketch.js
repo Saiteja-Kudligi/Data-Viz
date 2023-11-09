@@ -5,7 +5,7 @@ let colors = {};
 let rotationAngle = 0;
 
 function preload() {
-  earth = loadImage('Earthg.jpg');
+  earth = loadImage('Earth.jpg');
   cities = loadTable('worldcities.csv', 'header');
 }
 
