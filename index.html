@@ -3,40 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cities in the world</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       position: relative;
-    }
-    #zoomControl {
-      position: absolute;
-      top: 10px;
-      left: 10px; 
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    #zoomOutBtn, #zoomInBtn { 
-      font-size: 18px;
-      margin-left: 10px;
-    }
-    #zoomPercentage {
-      position: absolute;
-      top: 50px;
-      left: 10px; 
+      background-color: black; 
       color: white;
+    }
+  .center-text {
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div id="zoomControl">
-    <button id="zoomOutBtn">-</button> <!-- Swapped the buttons -->
-    <input type="number" id="zoomInput" step="0.1" min="0.1" max="10" value="1">
-    <button id="zoomInBtn">+</button> <!-- Swapped the buttons -->
-  </div>
-  <div id="zoomPercentage">Zoom: 100%</div>
+  <h1 class="center-text">Cities in the World</h1>
+  <p class="center-text">This project is showing cities of the world, cities of different countries in different colors</p>
+  <p class="center-text">Use Left & Right Arrow keys to control the Earth</p>
   <script src="sketch.js"></script>
 </body>
 </html>
